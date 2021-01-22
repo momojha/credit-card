@@ -1,0 +1,102 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Card List</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div>
+      <a mat-raised-button color="primary"
+      [routerLink]="['/create-card']"
+      >Create Card</a>
+    </div>
+    <div>
+
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Card Number</th>
+            <th scope="col">Card holder</th>
+            <th scope="col">Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let card of cards$ | async">
+            <td>{{ card.cardNumber }}</td>
+            <td>{{ card.cardHolder }}</td>
+            <td>
+              <button mat-raised-button color="primary" (click)="showUpdateForm(card)" class="btn btn-primary" style="margin: 5px">Update</button>
+              <button mat-raised-button (click)="deleteCard(card.id)" class="btn btn-danger" style="margin: 5px">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="isUpdateActivated" style="margin-top: 50px; margin-left: 50px;">
+        <h4>Update Card</h4>
+        <form [formGroup]="form" (ngSubmit)="updateCard(form)" >
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label for="cardNumber">Card Number</mat-label>
+            <input
+            matInput
+            formControlName="cardNumber"
+            placeholder="Card Number"
+            #cardNumber
+              style="width: 400px"/>
+            </mat-form-field>
+
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label for="cardHolder">Card Holder</mat-label>
+            <input
+            matInput
+            formControlName="cardHolder"
+            placeholder="Card Holder"
+            #cardHolder
+              style="width: 400px"/>
+
+            </mat-form-field>
+
+          </div>
+          <div class="form-group">
+
+            <mat-form-field>
+              <mat-label for="expirationDate">Expiration Date</mat-label>
+              <input matInput [matDatepicker]="expirationDate"  placeholder="Expiration Date" formControlName="expirationDate" [min]="minDate">
+              <mat-datepicker-toggle matSuffix [for]="expirationDate"></mat-datepicker-toggle>
+              <mat-datepicker #expirationDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label for="securityCode">Security Code</mat-label>
+            <input
+            type="number"
+            matInput
+            formControlName="securityCode"
+            placeholder="Security Code"
+            #securityCode
+              style="width: 400px"/>
+            </mat-form-field>
+
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <mat-label for="amount">Amount</mat-label>
+            <input
+            type="number"
+            matInput
+            formControlName="amount"
+            placeholder="Amount"
+            #amount
+              style="width: 400px"/>
+            </mat-form-field>
+
+          </div>
+          <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">Update</button>
+        </form>
+      </div>
+    </div>
+    </mat-card-content>
+    </mat-card>
+

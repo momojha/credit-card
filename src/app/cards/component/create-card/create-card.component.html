@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Create Card</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit(form)" [formGroup]="form">
+      <div class="form-group">
+
+        <mat-form-field>
+          <mat-label for="cardNumber">Card Number</mat-label>
+          <input
+        matInput
+        formControlName="cardNumber"
+        placeholder="Card Number"
+        #cardNumber
+          style="width: 400px"/>
+        </mat-form-field>
+
+      </div>
+      <div class="form-group">
+
+        <mat-form-field>
+          <mat-label for="cardHolder">Card Holder</mat-label>
+          <input
+        matInput
+        formControlName="cardHolder"
+        placeholder="Card Holder"
+        #cardHolder
+          style="width: 400px"/>
+        </mat-form-field>
+
+      </div>
+      <div class="form-group">
+
+        <mat-form-field>
+          <mat-label for="expirationDate">Expiration Date</mat-label>
+          <input matInput [matDatepicker]="expirationDate"  placeholder="Expiration Date" formControlName="expirationDate" [min]="minDate">
+          <mat-datepicker-toggle matSuffix [for]="expirationDate"></mat-datepicker-toggle>
+          <mat-datepicker #expirationDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+
+        <mat-form-field>
+          <mat-label for="securityCode">Security Code</mat-label>
+          <input
+        type="number"
+        matInput
+        formControlName="securityCode"
+        placeholder="Security Code"
+        #securityCode
+          style="width: 400px"/>
+        </mat-form-field>
+
+      </div>
+      <div class="form-group">
+
+
+        <mat-form-field>
+          <mat-label for="amount">Amount</mat-label>
+          <input
+          type="number"
+          matInput
+          formControlName="amount"
+          placeholder="Amount"
+          #amount
+            style="width: 400px"/>
+        </mat-form-field>
+
+      </div>
+      <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">Create</button>
+    </form>
+    </mat-card-content>
+    </mat-card>
+
